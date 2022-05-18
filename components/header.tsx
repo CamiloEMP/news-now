@@ -2,10 +2,13 @@ import { CgMenu } from 'react-icons/cg'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { useState } from 'react'
 
 import { HEADING, PrincipalCategorys } from 'constants/header.constants'
+import { Sidebar } from 'components/sidebar'
 
 export const Header = (): JSX.Element => {
+  const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
 
   return (
@@ -18,9 +21,10 @@ export const Header = (): JSX.Element => {
       </Head>
       <header className="flex flex-col items-center justify-center shadow-md gap-4 lg:flex-row lg:justify-between pt-3 lg:pt-0 ">
         <section className="flex items-center gap-8 md:gap-4 px-3 py-0">
-          <div>
+          <div className="cursor-pointer" role="button" onClick={() => setIsOpen(true)}>
             <CgMenu className="text-4xl" />
           </div>
+          <Sidebar isOpen={isOpen} onClose={setIsOpen} />
           <Link href="/">
             <a className="flex text-3xl font-heading">
               {HEADING.split('').map((letter, index) => (

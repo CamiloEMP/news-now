@@ -14,20 +14,9 @@ module.exports = {
             left: '0px',
           },
         },
-        'fade-in-left': {
-          '0%': {
-            opacity: 1,
-            left: '0px',
-          },
-          '100%': {
-            opacity: 0,
-            left: '-100%',
-          },
-        },
       },
       animation: {
-        fadeInRight: 'fade-in-right 0.8s ease-in-out forwards',
-        fadeInLeft: 'fade-in-left 0.8s ease-in-out forwards',
+        fadeInRight: 'fade-in-right 0.5s ease-in-out forwards',
       },
     },
     fontFamily: {

@@ -1,3 +1,4 @@
+import { ISO } from 'types/city.types'
 import {
   FlagAlemania,
   FlagArgentina,
@@ -7,13 +8,7 @@ import {
   FlagMexico,
 } from 'components/flags'
 
-interface Iso {
-  name: string
-  code: string
-  icon: JSX.Element
-}
-
-export const ISOS_CONSTANTS: Iso[] = [
+export const ISOS_CONSTANTS: ISO[] = [
   {
     name: 'United States',
     code: 'us',

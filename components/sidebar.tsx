@@ -1,17 +1,21 @@
-interface Props {
-  isOpen: boolean
-  onClose: (action: boolean) => void
-}
+import { useTheme } from 'next-themes'
+import { CgMoon, CgSun } from 'react-icons/cg'
 
-export const Sidebar = ({ onClose, isOpen }: Props) => {
+export const Sidebar = () => {
+  const { theme, setTheme } = useTheme()
+
   return (
-    <div
-      className={`absolute bg-black text-white w-80 h-screen top-0 left-0 z-50 ${
-        isOpen ? 'animate-fadeInRight' : 'animate-fadeInLeft'
-      }`}
+    <section
+      className="absolute bg-black text-white w-full left-full top-14 z-50 px-4 py-12 animate-fadeInRight border-b-2
+      "
     >
-      <button onClick={() => onClose(false)}>sd</button>
-      <h1>Sidebar</h1>
-    </div>
+      <button
+        className="flex items-center gap-2 border-2 border-white py-2 px-4 rounded-lg hover:bg-white hover:text-black transition-colors"
+        onClick={() => setTheme(theme === 'dark' ? 'ligth' : 'dark')}
+      >
+        <span className="text-xl lg:text-2xl font-heading">Change theme</span>
+        {theme === 'dark' ? <CgSun className="text-3xl" /> : <CgMoon className="text-3xl" />}
+      </button>
+    </section>
   )
 }

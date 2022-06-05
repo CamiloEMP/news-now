@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { CgMenu, CgClose } from 'react-icons/cg'
 
 import { useCity } from 'hooks/useCity'
-import { Sidebar } from 'components/sidebar'
 import { HEADING, PrincipalCategorys } from 'constants/header.constants'
 import { ISOS_CONSTANTS } from 'constants/isos.constants'
-import { ISO } from 'types/city.types'
+
+import { ToggleTheme } from './toggle-theme'
 
 export const Header = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false)
   const { city, setCity } = useCity()
   const router = useRouter()
 
@@ -31,15 +29,8 @@ export const Header = (): JSX.Element => {
           {router.asPath !== '/' ? ` | ${router.asPath.slice(1).toLocaleUpperCase()}` : ''}
         </title>
       </Head>
-      <header className="flex flex-col items-center justify-center shadow-md gap-4 lg:flex-row lg:justify-between pt-3 lg:pt-0">
-        {isOpen && <Sidebar />}
+      <header className="flex flex-col items-center justify-center shadow-md gap-2 lg:flex-row lg:justify-between pt-3 lg:pt-0 sticky top-0 z-40 bg-slate-50 dark:bg-neutral-900">
         <section className="flex items-center gap-4 px-3 py-0">
-          <button
-            className="cursor-pointer text-2xl lg:text-4xl"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <CgClose /> : <CgMenu />}
-          </button>
           <Link href="/">
             <a className="flex text-xl lg:text-3xl font-heading">
               {HEADING.split('').map((letter, index) => (
@@ -54,10 +45,11 @@ export const Header = (): JSX.Element => {
               ))}
             </a>
           </Link>
-          {city.name !== '' && <div className="ml-2 scale-[2.0]">{city.icon}</div>}
+          {city.name !== '' && <div className="ml-2 scale-[2.0] mr-6">{city.icon}</div>}
+          <ToggleTheme />
         </section>
-        <nav className="max-w-full overflow-hidden overflow-x-scroll md:overflow-auto bg-black py-4 px-2 md:px-6 lg:py-3">
-          <ul className="flex gap-6">
+        <nav className="w-full lg:w-max overflow-hidden overflow-x-scroll md:overflow-auto bg-black py-4 px-2 md:px-6 lg:py-3">
+          <ul className="flex justify-between lg:gap-4">
             {PrincipalCategorys.map((category, index) => (
               <li
                 key={index}
